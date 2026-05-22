@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIP 遊學人格測驗</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC",sans-serif;background:linear-gradient(135deg,#fff7ea,#e9f3ff 50%,#ffeaf2);color:#18202c;overflow-x:hidden}.page{display:none;min-height:100vh;padding:24px}.active{display:flex;animation:fade .35s ease both}@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}.bubble{position:fixed;border-radius:999px;opacity:.35;filter:blur(2px);z-index:-1;animation:float 8s ease-in-out infinite}@keyframes float{50%{transform:translateY(-22px) rotate(8deg)}}.b1{width:180px;height:180px;background:#ffc857;top:5%;left:-50px}.b2{width:220px;height:220px;background:#8ec5ff;right:-60px;bottom:8%;animation-delay:1s}.b3{width:120px;height:120px;background:#ff8fab;left:6%;top:55%;animation-delay:2s}.hero{flex-direction:column;align-items:center;justify-content:center;text-align:center}.hero-card,.question-card,.result-card{background:rgba(255,255,255,.78);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.9);box-shadow:0 24px 60px rgba(20,30,50,.14);border-radius:34px}.hero-card{width:min(720px,100%);padding:42px 26px}.badge{display:inline-block;background:rgba(255,255,255,.76);padding:10px 16px;border-radius:999px;margin-bottom:22px;font-weight:800;box-shadow:0 10px 30px rgba(0,0,0,.08)}h1{font-size:clamp(34px,7vw,58px);line-height:1.12;margin-bottom:18px;letter-spacing:-1px}.hero p{font-size:clamp(18px,4.4vw,24px);line-height:1.65;color:#4b5563;margin-bottom:30px}.btn{border:0;border-radius:999px;padding:16px 26px;font-size:18px;font-weight:850;cursor:pointer;box-shadow:0 14px 26px rgba(17,24,39,.18);transition:.2s}.btn:hover{transform:translateY(-3px)}.btn-dark{background:#111827;color:white}.btn-light{background:white;color:#111827}.note{margin-top:16px;color:#6b7280}.quiz{flex-direction:column;max-width:760px;margin:auto;width:100%;padding-top:36px}.topbar{display:flex;align-items:center;gap:12px;margin-bottom:20px}.progress-text{font-weight:800;color:#6b7280}.track{height:10px;background:rgba(255,255,255,.7);border-radius:999px;overflow:hidden;flex:1}.fill{height:100%;width:0;background:linear-gradient(90deg,#f59e0b,#ef476f,#3b82f6);transition:.3s}.question-card{padding:28px}.question{font-size:clamp(26px,6vw,38px);font-weight:950;line-height:1.35;margin-bottom:24px}.options{display:grid;gap:14px}.option{background:#fff;padding:20px 20px 20px 26px;border-radius:22px;font-size:19px;line-height:1.45;cursor:pointer;box-shadow:0 10px 20px rgba(0,0,0,.06);border:2px solid transparent;position:relative;overflow:hidden}.option:before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:linear-gradient(#f59e0b,#ef476f)}.option:hover{transform:translateY(-3px);border-color:#ffd166}.result{flex-direction:column;align-items:center;text-align:center;max-width:900px;margin:auto;padding-bottom:70px}.result-card{width:100%;padding:26px}.result-tag{font-size:16px;color:#6b7280;font-weight:900;margin-bottom:8px}.result-title{font-size:clamp(30px,7vw,48px);font-weight:950;line-height:1.18}.result-grid{display:grid;grid-template-columns:320px 1fr;gap:24px;align-items:center;text-align:left;margin-top:22px}.result img{width:100%;border-radius:28px;box-shadow:0 18px 38px rgba(0,0,0,.14);animation:pop .5s ease both}@keyframes pop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}.box{background:white;padding:22px;border-radius:24px;line-height:1.85;font-size:18px;box-shadow:0 10px 20px rgba(0,0,0,.05);margin-bottom:16px}.quote{font-size:24px;font-weight:950;line-height:1.5;background:linear-gradient(90deg,#111827,#ef476f);-webkit-background-clip:text;color:transparent;margin:18px 0}.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:22px}.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#111827;color:white;padding:12px 18px;border-radius:999px;display:none;font-weight:800}.toast.show{display:block}@media(max-width:760px){.page{padding:18px}.hero-card,.question-card,.result-card{border-radius:28px}.result-grid{grid-template-columns:1fr;text-align:center}.result img{max-width:310px;margin:auto}.box{text-align:left}}
+</style>
+</head>
+<body>
+<div class="bubble b1"></div><div class="bubble b2"></div><div class="bubble b3"></div>
+
+<section id="hero" class="page hero active">
+  <div class="badge">VIP 遊學小測驗 ✈️</div>
+  <div class="hero-card">
+    <h1>測測看你是哪種遊學生？</h1>
+    <p>第一次出國，<br>你會先社死、迷路，<br>還是直接交到朋友？</p>
+    <button class="btn btn-dark" onclick="startQuiz()">開始測驗</button>
+    <div class="note">7 題就知道你的遊學人格</div>
+  </div>
+</section>
+
+<section id="quiz" class="page quiz">
+  <div class="topbar"><div class="progress-text" id="progressText"></div><div class="track"><div class="fill" id="progressFill"></div></div></div>
+  <div class="question-card"><div class="question" id="question"></div><div class="options" id="options"></div></div>
+</section>
+
+<section id="result" class="page result">
+  <div class="result-card">
+    <div class="result-tag">你的遊學人格是</div>
+    <div class="result-title" id="resultTitle"></div>
+    <div class="result-grid">
+      <img id="resultImage">
+      <div>
+        <div class="box" id="resultDesc"></div>
+        <div class="box" id="resultCountry"></div>
+        <div class="quote" id="resultQuote"></div>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn btn-dark" onclick="shareResult()">分享這個結果</button>
+      <button class="btn btn-light" onclick="restartQuiz()">再測一次</button>
+      <button class="btn btn-light" onclick="goHome()">回首頁</button>
+    </div>
+  </div>
+</section>
+<div id="toast" class="toast">已複製結果頁連結，可以貼給朋友！</div>
+
+<script>
+const questions=[
+{q:"第一次出國你最怕？",a:[["不敢講英文","A"],["交不到朋友","B"],["吃不習慣","C"],["一個人不敢冒險","D"]]},
+{q:"到了國外 Welcome Party，你會？",a:[["主動想聊天但超尷尬","A"],["先站旁邊觀察","B"],["先研究食物區","C"],["硬著頭皮加入陌生人","D"]]},
+{q:"第一次迷路時，你會？",a:[["假裝很冷靜","A"],["默默開 Google Maps","B"],["先去便利商店買東西","C"],["鼓起勇氣直接問路","D"]]},
+{q:"第一次英文聽不懂，你會？",a:[["先笑著點頭","A"],["當場當機","B"],["邊吃邊假裝有聽懂","C"],["勇敢說 Can you say again?","D"]]},
+{q:"第一次 Homestay 晚餐，你會？",a:[["很想聊天但不知道怎麼開口","A"],["安靜觀察大家互動","B"],["默默吃超多","C"],["主動幫忙收盤子","D"]]},
+{q:"如果外國同學主動跟你聊天？",a:[["表面自然其實超緊張","A"],["禮貌微笑慢慢聊","B"],["一聊到食物就開啟話題","C"],["即使害怕還是會接話","D"]]},
+{q:"你最想在遊學得到什麼？",a:[["交到國外朋友","A"],["變得更成熟","B"],["吃遍世界美食","C"],["變得更勇敢","D"]]}
+];
+const results={
+A:{title:"李白型遊學生｜浪漫社交型",image:"1李白.png",desc:"你其實很想認識世界。只是第一次到陌生環境時，容易突然社交失靈。你不是不敢交朋友，只是太在意自己看起來 awkward。",country:"✈️ 適合國家<br><br>🇬🇧 英國：社交節奏自然、有文化感，很適合慢慢打開自己。<br><br>🇨🇦 加拿大：人友善、包容感高，第一次出國比較容易建立自信。",quote:"你缺的不是能力，是第一個開口的瞬間。"},
+B:{title:"杜甫型遊學生｜慢熟觀察型",image:"2杜甫.png",desc:"你不是不想融入，只是需要一點時間適應陌生環境。你很會觀察，也很容易記住旅途中的小細節。",country:"✈️ 適合國家<br><br>🇳🇿 紐西蘭：步調慢、自然感強，很適合第一次離家的人。<br><br>🇦🇺 澳洲：氣氛比較 chill，不會有太大社交壓力。",quote:"慢一點也沒關係，世界會等你開口。"},
+C:{title:"蘇東坡型遊學生｜美食探索型",image:"3蘇軾.png",desc:"你適應世界的方法：先吃一口。你對陌生文化的接受度超高，常常因為一間餐廳、一個超市、一頓晚餐愛上一座城市。",country:"✈️ 適合國家<br><br>🇺🇸 美國：美食、城市、文化刺激很多，每天都像冒險。<br><br>🇯🇵 日本：超商、美食、生活細節宇宙，會直接愛上。",quote:"有時候，認識世界是從一餐飯開始。"},
+D:{title:"花木蘭型遊學生｜勇敢突破型",image:"4花木蘭.jpg",desc:"你會怕，但你還是會去做。第一次問路、第一次點餐、第一次自己搭車，每次社死都是你的升級任務。",country:"✈️ 適合國家<br><br>🇺🇸 美國：最容易逼人成長與開口。<br><br>🇦🇺 澳洲：有冒險感，但環境相對輕鬆，適合第一次挑戰世界。",quote:"勇敢不是不怕，是怕了還是出發。"}
+};
+let current=0, score={A:0,B:0,C:0,D:0}, finalResult=null, finalCode=null;
+function showOnly(id){["hero","quiz","result"].forEach(p=>document.getElementById(p).classList.remove("active"));document.getElementById(id).classList.add("active");scrollTo({top:0,behavior:"smooth"});}
+function startQuiz(){current=0;score={A:0,B:0,C:0,D:0};showOnly("quiz");renderQuestion();}
+function renderQuestion(){let q=questions[current];document.getElementById("progressText").innerText=`${current+1} / ${questions.length}`;document.getElementById("progressFill").style.width=`${(current/questions.length)*100}%`;document.getElementById("question").innerText=q.q;let box=document.getElementById("options");box.innerHTML="";q.a.forEach(o=>{let d=document.createElement("div");d.className="option";d.innerText=o[0];d.onclick=()=>selectAnswer(o[1]);box.appendChild(d);});}
+function selectAnswer(type){score[type]++;current++;if(current<questions.length)renderQuestion();else{document.getElementById("progressFill").style.width="100%";let win=Object.keys(score).sort((a,b)=>score[b]-score[a])[0];showResult(win,true);}}
+function showResult(code,updateUrl=false){finalCode=code;finalResult=results[code];showOnly("result");document.getElementById("resultTitle").innerHTML=finalResult.title;document.getElementById("resultImage").src=finalResult.image;document.getElementById("resultDesc").innerHTML=finalResult.desc;document.getElementById("resultCountry").innerHTML=finalResult.country;document.getElementById("resultQuote").innerHTML="🔥 "+finalResult.quote;if(updateUrl){let url=new URL(location.href);url.searchParams.set("result",code);history.replaceState(null,"",url.toString());}}
+function resultUrl(){let url=new URL(location.href);url.searchParams.set("result",finalCode);return url.toString();}
+async function shareResult(){let url=resultUrl();let text=`我測出來是：${finalResult.title}！\n${finalResult.quote}\n\n點開看我的結果，也來測測看你是哪種遊學生 ✈️`;if(navigator.share){try{await navigator.share({title:"VIP遊學人格測驗",text,url});return;}catch(e){}}try{await navigator.clipboard.writeText(text+"\n"+url);let t=document.getElementById("toast");t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2200);}catch(e){alert(text+"\n"+url);}}
+function restartQuiz(){let url=new URL(location.href);url.searchParams.delete("result");history.replaceState(null,"",url.toString());startQuiz();}
+function goHome(){let url=new URL(location.href);url.searchParams.delete("result");history.replaceState(null,"",url.toString());showOnly("hero");}
+window.addEventListener("DOMContentLoaded",()=>{let r=new URLSearchParams(location.search).get("result");if(r&&results[r])showResult(r,false);else showOnly("hero");});
+</script>
+</body>
+</html>
